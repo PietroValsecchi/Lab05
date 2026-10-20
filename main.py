@@ -36,7 +36,20 @@ def main(page: ft.Page):
     lista_strumenti = ft.ListView(expand=True, spacing=5, padding=10, auto_scroll=True)
 
     # Tutti i TextField per le info necessarie per aggiungere un nuovo strumento (tipo, marca, anno, contatore posti)
-    # TODO
+    inputTipo = ft.TextField(label="Tipo", width=250)
+    inputMarca = ft.TextField(label="Marca", width=250)
+    inputAnnoAcquisto = ft.TextField(label="Anno Acquisto", width=250)
+    meno = ft.IconButton(icon=ft.Icons.REMOVE, icon_color="red")
+    valore = ft.TextField(value="0", height=50, width=50, text_align=ft.TextAlign.CENTER)
+    piu = ft.IconButton(icon=ft.Icons.ADD, icon_color="green")
+    contatore = ft.Container(
+        content=ft.Row(
+            controls=[meno, valore, piu],
+            spacing=5,
+            alignment=ft.MainAxisAlignment.CENTER
+        ),
+        padding=5)
+
 
     # --- FUNZIONI APP ---
     def aggiorna_lista_strumenti():
@@ -58,14 +71,15 @@ def main(page: ft.Page):
         page.update()
 
     # Handlers per la gestione dei pulsanti utili all'inserimento di un nuovo strumento
-    # TODO
+    def confermaStrumento():
 
+        pass
     # --- EVENTI ---
     toggle_cambia_tema = ft.Switch(label="Tema scuro", value=True, on_change=cambia_tema)
     pulsante_conferma_responsabile = ft.ElevatedButton("Conferma", on_click=conferma_responsabile)
 
     # Pulsanti per la gestione dell'inserimento di un nuovo strumento
-    # TODO
+    pulsante_conferma_stumento = ft.ElevatedButton("Aggiungi strumento", on_click=confermaStrumento)
 
     # --- LAYOUT ---
     page.add(
@@ -83,13 +97,22 @@ def main(page: ft.Page):
                alignment=ft.MainAxisAlignment.CENTER),
 
         # Sezione 3
-        # TODO
+        ft.Divider(),
+
+        ft.Text("Aggiungi nuovo strumento", size=20),
+
+
+        ft.Row(spacing=100,
+               controls=[inputTipo, inputMarca, inputAnnoAcquisto, contatore],
+               alignment=ft.MainAxisAlignment.CENTER),
+
+        ft.Row(controls=[pulsante_conferma_stumento],
+               alignment=ft.MainAxisAlignment.CENTER),
 
         # Sezione 4
         ft.Divider(),
         ft.Text("Strumenti", size=20),
-        lista_strumenti,
-    )
+        lista_strumenti, )
     aggiorna_lista_strumenti()
 
 ft.app(target=main)
