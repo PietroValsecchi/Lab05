@@ -83,13 +83,15 @@ def main(page: ft.Page):
             alert.show_alert("❌ Errore: inserisci valori numerici validi per anno acquisto e prezzo")
 
 
-
     def diminuisciValore(e):
         numero = int(valore.value)
         if numero > 0:
             numero -= 1
+        else:
+            alert.show_alert("❌ Errore: Il prezzo non può essere negativo!")
         valore.value = str(numero)
         page.update()
+
 
     def aumentaValore(e):
         numero = int(valore.value)
