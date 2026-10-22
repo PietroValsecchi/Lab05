@@ -101,10 +101,10 @@ def main(page: ft.Page):
 
     # --- EVENTI ---
     toggle_cambia_tema = ft.Switch(label="Tema scuro", value=True, on_change=cambia_tema)
-    pulsante_conferma_responsabile = ft.ElevatedButton("Conferma", on_click=conferma_responsabile)
+    pulsante_conferma_responsabile = ft.Button("Conferma", on_click=conferma_responsabile)
 
     # Pulsanti per la gestione dell'inserimento di un nuovo strumento
-    pulsante_conferma_stumento = ft.ElevatedButton("Aggiungi strumento", on_click=confermaStrumento)
+    pulsante_conferma_stumento = ft.Button("Aggiungi strumento", on_click=confermaStrumento)
     meno = ft.IconButton(icon=ft.Icons.REMOVE, icon_color="red", on_click=diminuisciValore)
     piu = ft.IconButton(icon=ft.Icons.ADD, icon_color="green", on_click=aumentaValore)
     contatore = ft.Container(
@@ -150,4 +150,4 @@ def main(page: ft.Page):
         lista_strumenti, )
     aggiorna_lista_strumenti()
 
-ft.app(target=main)
+ft.run(main)
