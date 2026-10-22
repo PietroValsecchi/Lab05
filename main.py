@@ -80,7 +80,7 @@ def main(page: ft.Page):
             aggiorna_lista_strumenti()
             page.update()
         else:
-            alert.show_alert("❌ Errore: inserisci valori numerici validi per anno acquisto e prezzo")
+            alert.show_alert("❌ Errore: inserisci valori numerici validi per anno acquisto e prezzo!")
 
 
     def diminuisciValore(e):
