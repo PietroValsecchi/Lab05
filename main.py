@@ -39,7 +39,7 @@ def main(page: ft.Page):
     inputTipo = ft.TextField(label="Tipo", width=250)
     inputMarca = ft.TextField(label="Marca", width=250)
     inputAnnoAcquisto = ft.TextField(label="Anno Acquisto", width=250)
-    valore = ft.TextField(hint_text="0", height=60, width=60, text_align=ft.TextAlign.CENTER)
+    valore = ft.TextField(value="0", height=60, width=60, text_align=ft.TextAlign.CENTER)
 
 
 
