@@ -39,16 +39,8 @@ def main(page: ft.Page):
     inputTipo = ft.TextField(label="Tipo", width=250)
     inputMarca = ft.TextField(label="Marca", width=250)
     inputAnnoAcquisto = ft.TextField(label="Anno Acquisto", width=250)
-    meno = ft.IconButton(icon=ft.Icons.REMOVE, icon_color="red")
-    valore = ft.TextField(value="0", height=50, width=50, text_align=ft.TextAlign.CENTER)
-    piu = ft.IconButton(icon=ft.Icons.ADD, icon_color="green")
-    contatore = ft.Container(
-        content=ft.Row(
-            controls=[meno, valore, piu],
-            spacing=5,
-            alignment=ft.MainAxisAlignment.CENTER
-        ),
-        padding=5)
+    valore = ft.TextField(hint_text="0", height=60, width=60, text_align=ft.TextAlign.CENTER)
+
 
 
     # --- FUNZIONI APP ---
@@ -71,15 +63,55 @@ def main(page: ft.Page):
         page.update()
 
     # Handlers per la gestione dei pulsanti utili all'inserimento di un nuovo strumento
-    def confermaStrumento():
+    def confermaStrumento(e):
+        if inputAnnoAcquisto.value.isdigit() and valore.value.isdigit():
+            annoAcquisto = int(inputAnnoAcquisto.value)
+            prezzo = int(valore.value)
+            deposito.aggiungi_strumento(
+                inputTipo.value,
+                inputMarca.value,
+                annoAcquisto,
+                prezzo)
 
-        pass
+            inputTipo.value = ""
+            inputMarca.value = ""
+            inputAnnoAcquisto.value = ""
+            valore.value = "0"
+            aggiorna_lista_strumenti()
+            page.update()
+        else:
+            alert.show_alert("❌ Errore: inserisci valori numerici validi per anno acquisto e prezzo")
+
+
+
+    def diminuisciValore(e):
+        numero = int(valore.value)
+        if numero > 0:
+            numero -= 1
+        valore.value = str(numero)
+        page.update()
+
+    def aumentaValore(e):
+        numero = int(valore.value)
+        numero += 1
+        valore.value = str(numero)
+        page.update()
+
     # --- EVENTI ---
     toggle_cambia_tema = ft.Switch(label="Tema scuro", value=True, on_change=cambia_tema)
     pulsante_conferma_responsabile = ft.ElevatedButton("Conferma", on_click=conferma_responsabile)
 
     # Pulsanti per la gestione dell'inserimento di un nuovo strumento
     pulsante_conferma_stumento = ft.ElevatedButton("Aggiungi strumento", on_click=confermaStrumento)
+    meno = ft.IconButton(icon=ft.Icons.REMOVE, icon_color="red", on_click=diminuisciValore)
+    piu = ft.IconButton(icon=ft.Icons.ADD, icon_color="green", on_click=aumentaValore)
+    contatore = ft.Container(
+        content=ft.Row(
+            controls=[meno, valore, piu],
+            spacing=5,
+            alignment=ft.MainAxisAlignment.CENTER
+        ),
+        padding=5)
 
     # --- LAYOUT ---
     page.add(
@@ -97,6 +129,7 @@ def main(page: ft.Page):
                alignment=ft.MainAxisAlignment.CENTER),
 
         # Sezione 3
+
         ft.Divider(),
 
         ft.Text("Aggiungi nuovo strumento", size=20),
